@@ -203,8 +203,11 @@ Route::get('/add-cart/{id}', [AdminCartController::class, 'addToCart'])->name('a
 //update giỏ hàng
 
 Route::post('update-cart',[AdminCartController::class,'updateCart'])->name('update.cart');
-// Route::post('update-cart/{id}', [AdminCartController::class, 'updateCart'])->name('update.cart');
 
+
+//xoá giỏ hàng
+
+Route::get('remove-cart/{rowId}',[AdminCartController::class,'deleteCart'])->name('remove.cart');
 
 
 //thực thi viết route cho giỏ hàng

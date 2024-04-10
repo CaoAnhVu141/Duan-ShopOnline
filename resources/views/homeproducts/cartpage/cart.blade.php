@@ -43,13 +43,12 @@
                                     <tbody>
                                         @foreach (Cart::content() as $item)
                                         <tr>
-                                            <td class="product_remove"><a href="{{ route('productsdetail',$item->id) }}"><i class="fa fa-trash-o"></i></a></td>
-                                             <td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>
+                                            <td class="product_remove"><a href="{{ route('remove.cart',$item->rowId) }}" onclick="return confirm('Bạn có muốn thực hiện xoá không nè')"><i class="fa fa-trash-o"></i></a></td>
+                                             <td class="product_thumb"><a href="#"><img src="{{ asset($item->options->thumbnail) }}" alt="" height="30px" width="30px"></a></td>
                                              <td class="product_name"><a href="{{ route('productsdetail',$item->id) }}">{{$item->name }}</a></td>
                                              <td class="product-price">{{ number_format($item->price,0,',','.')}}</td>
                                              <td class="product_quantity">
-                                            <input min="1" max="100" value="{{ $item->qty }}" name="quantity" type="number">
-                                           <input type="hidden" name="product_id" value="{{$item->id }}">
+                                            <input min="1" max="100" value="{{ $item->qty }}" name="quantity[{{ $item->rowId }}]" type="number">
                                             </td>
                                              <td class="product_total">
                                                 {{ number_format($item->price * $item->qty, 0, ',', '.') }}
@@ -61,7 +60,7 @@
                                 </table>   
                             </div>  
                             <div class="cart_submit">
-                                <button type="submit">update cart</button>
+                                <button type="submit" name="btn_update" value="update">update cart</button>
                             </div> 
                             </form>     
                         </div>

@@ -33,36 +33,41 @@ class AdminCartController extends Controller
         'name'=> $products->nameproduct,
         'qty'=> 1,
         'price'=> $products->price,
+        'options' =>['thumbnail'=>$products->image]
       ]);
-       
 
-      return redirect('cart');
+      return redirect('/cart');
+
+      // echo "<pre>";
+      // print_r(Cart::content());
       
     }
 
+
+    //xây dựng hàm xoá
+
+    public function deleteCart($rowId)
+    {
+      Cart::remove($rowId);
+      return redirect('/cart');
+    }
+
+
     //xử lý cập nhật giỏ hàng
 
-    public function updateCart(Request $request, $id)
+    public function updateCart(Request $request)
     {
-      $newCart = $request->input('quantity');
-      Cart::update($id,$newCart);
+      
+      $data = $request->get('quantity');
 
-      return redirect()->back();
+      //dùng vòng lặp để thực hiệm lặp toàn bộ số lượng và sau đó thực hiện update
+      //dùng key value
+     foreach ($data as $key => $value) {
+        Cart::update($key,$value);
+     }
+     return redirect('/cart');
+
     }
-//     public function updateCart(Request $request, $id)
-// {
-//     // Lấy số lượng mới từ request
-//     $newQuantities = $request->input('quantity');
-    
-//     // Lấy ID của sản phẩm từ đối số truyền vào
-//     $productId  = $request->input('product_id');
 
-//     // Lặp qua mảng số lượng mới để cập nhật giỏ hàng
-//     foreach ($newQuantities as $key => $newQuantity) {
-//         Cart::update($productId [$key], $newQuantity);
-//     }
-
-//     return redirect()->back();
-// }
    
 }

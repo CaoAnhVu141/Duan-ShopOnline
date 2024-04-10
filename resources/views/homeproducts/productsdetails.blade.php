@@ -607,7 +607,7 @@
                             </div>
                             <div class="product_variant quantity">
                                 <label>quantity</label>
-                                <input min="1" max="100" value="1" type="number">
+                                <input min="1" max="100" value="{{ $productdetail->qty }}" name="quantity" type="number">
                                 
                             <a href=""><button class="button" type="submit">Mua ngay</button></a>  
                             </div>
